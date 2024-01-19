@@ -23,6 +23,7 @@ int main() {
 
     //use hashmap to store the maximum answer for a given value
     //if we use hashmap, then there will no require to use the inner loop
+    //then, tc:O(n)  sc:O(n)
 
     while(i<=n){
         
