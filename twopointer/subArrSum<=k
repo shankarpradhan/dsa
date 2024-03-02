@@ -5,7 +5,8 @@ bfa(brute force approach): take two loops, 1st one used to traveling the array, 
 
 optimized approach: While traversing the array from left to right, count the number of subarrays whose sum is less than or equal to k. 
                     If the sum exceeds k, remove elements from the left side of the subarray.
-
+dry run: 
+https://jamboard.google.com/d/1VzTx4L7JREY6LcI3OOetFkFb6MhYQgVrBPEAk71ROQw/viewer?f=2
 */
 
 #include <bits/stdc++.h>
@@ -58,16 +59,3 @@ int main(){
     return 0;
 }
 
-/*
-input:
-6 7
-4 2 1 8 3 4
-output:
-9
-
-input:
-6 7
-4 2 1 2 3 4
-output:
-14
-*/
