@@ -1,0 +1,73 @@
+/*
+here we have to count the subarrayas having sum <= k
+
+bfa(brute force approach): take two loops, 1st one used to traveling the array, and the 2nd one used to cnt the subarrays till the sum <= k
+
+optimized approach: While traversing the array from left to right, count the number of subarrays whose sum is less than or equal to k. 
+                    If the sum exceeds k, remove elements from the left side of the subarray.
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int subArrSumsK(vector<int> a, int k){
+    int i = 0, j = 0;
+    
+    int sum = 0, cnt = 0, subCount=0;
+    
+    while(i<a.size()){
+        
+        if(sum+a[i] <= k){
+            cnt++;
+            sum += a[i];
+            subCount += cnt;
+            i++;
+        }
+        else{
+            if(a[i]>k){
+                i++;
+                j = i;
+                cnt = 0;
+                sum = 0;
+            }
+            else{
+                sum -= a[j];
+                cnt--;
+                j++;
+            }
+        }
+        
+        
+    }
+    return subCount;
+}
+
+int main(){
+    int n, k;
+    cin >> n >> k;
+    
+    vector<int> a(n);
+    
+    
+    for(auto& i:a){
+        cin >> i;
+    }
+    
+    cout << subArrSumsK(a, k) << "\n";
+    return 0;
+}
+
+/*
+input:
+6 7
+4 2 1 8 3 4
+output:
+9
+
+input:
+6 7
+4 2 1 2 3 4
+output:
+14
+*/
