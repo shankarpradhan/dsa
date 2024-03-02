@@ -1,0 +1,117 @@
+// here we have to calculate number of valleys possbile from the given array
+
+// valley means left and right should be greater than the mid one
+// brute force:  
+// Continue traveling until you encounter a value smaller than the previous one, and once you find a greater value, continue until the next one surpasses the previous peak, and increase the counter by 1.
+
+//optimized approach: (both time and space)
+// use two auxilary array: left and right
+// continue traveling until you encounter a value smaller than previous one, and store the depth, and once you find a greater value, change the depth value to 1
+// similary calculate depth from right to left
+
+//super optimized approach: (space)
+//while traveling from left to right to calculate the valleys, at the same time, the depth can be using a variable
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int countValleys(vector<int>& a, int n){
+    vector<int> right(n);
+    
+    int i=n-1;
+    
+    while(i>=0){
+        if(i==n-1){
+            right[i] = 1;
+        }
+        else if(a[i]<a[i+1]){
+            right[i] = right[i+1]+1;
+        }
+        else{
+            right[i] = 1;
+        }
+        i--;
+    }
+    
+    i = 1;
+    
+    int g = 1;
+    int valleys = 0;
+    
+    while(i<n-1){
+        if(a[i-1]>a[i]){
+            g = g+1;
+        }
+        else{
+            g = 1;
+        }
+        
+        if(a[i-1]>a[i] && a[i]<a[i+1]){
+            valleys = valleys + (g-1)*right[i+1];
+        }
+        i++;
+    }
+    
+    return valleys;
+}
+
+
+int main(){
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    
+    for(auto& i:a){
+        cin >> i;
+    }
+    
+    
+    cout << countValleys(a, n) << "\n";
+    return 0;
+}
+
+
+// int countValleys(vector<int>& a, int n){
+//     vector<int> left(n), right(n);
+    
+//     int i = 0;
+    
+//     while(i<n){
+//         if(i==0){
+//             left[i] = 1;
+//         }
+//         else if(a[i-1]>a[i]){
+//             left[i] = left[i-1]+1;
+//         }
+//         else{
+//             left[i] = 1;
+//         }
+//         i++;
+//     }
+//     i=n-1;
+    
+//     while(i>=0){
+//         if(i==n-1){
+//             right[i] = 1;
+//         }
+//         else if(a[i]<a[i+1]){
+//             right[i] = right[i+1]+1;
+//         }
+//         else{
+//             right[i] = 1;
+//         }
+//         i--;
+//     }
+    
+//     i = 1;
+//     int valleys = 0;
+    
+//     while(i<n-1){
+//         if(a[i-1]>a[i] && a[i]<a[i+1]){
+//             valleys = valleys + left[i-1]*right[i+1];
+//         }
+//         i++;
+//     }
+    
+//     return valleys;
+// }
