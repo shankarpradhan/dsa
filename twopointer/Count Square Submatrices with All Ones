@@ -1,7 +1,19 @@
+/*
+count the number of square submatrices in which each index has a value equal to 1.
+Qlink: https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/
+to solve the main problem first solve below problems: 
+i. try to find all the submatrix sum possible from top-left element of the matrix
+ii. try to find the sum of submatrixes
+
+//brute-force-approach: whenever we found the value of the matrix is 1,  try to find all valid subarray from that point by traveling in square shape (just increase the both row and column by 1)
+
+//optimzed-approch:
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
-void countSquares(vector<vector<int>>& matrix) {
+int countSquares(vector<vector<int>>& matrix) {
     int n = matrix.size();
     int m = matrix[0].size();
     vector<vector<int>>prefSum(n+1, vector<int>(m+1, 0));
@@ -16,8 +28,8 @@ void countSquares(vector<vector<int>>& matrix) {
             int a = i, b = j;
             if(matrix[i-1][j-1]==1){
                 while(a<=n && b<=m){
-                    // int sum = prefSum[a][b] - (prefSum[i-1][b]+prefSum[a][j-1]) + prefSum[i-1][j-1];
-                    cout << a << " " << b << " " << sum << endl;
+                    int sum = prefSum[a][b] - (prefSum[i-1][b]+prefSum[a][j-1]) + prefSum[i-1][j-1];
+                    //cout << a << " " << b << " " << sum << endl;
                     int v = a-i+1;
                     if((a==i && b==j) || sum==v*v){
                         cnt++;
@@ -30,8 +42,7 @@ void countSquares(vector<vector<int>>& matrix) {
             }
         }
     }
-    cout << cnt << endl;
-    // return cnt;
+    return cnt;
 }
 
 int main(){
