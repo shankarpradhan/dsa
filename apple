@@ -1,0 +1,25 @@
+/*
+Q. Here, apples are given to divide between two people who already have some. You must determine how many different methods there are to distribute the apples 
+so that the first person always receives more than the second.
+i. 
+
+*/
+#include<iostream>
+using namespace std;
+int main(){
+    int a,b,c;
+    cin >> a >> b >> c;
+    int count = 0;
+    for(int i = c; i >= 0; i--){
+        if(a+i > b+c-i)
+        {
+            count++;
+        }
+        else
+        {
+            break;
+        }
+    }
+    cout << count << endl;
+    return 0;
+}
