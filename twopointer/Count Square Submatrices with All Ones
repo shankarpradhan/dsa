@@ -55,7 +55,7 @@ int main(){
         }
     }  
 
-    countSquares(matrix);
+    cout << countSquares(matrix) << "\n";
     
     return 0;
 }
